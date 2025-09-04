@@ -2,13 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mon Blog Firebase</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <!-- Header avec authentification -->
       <header>
         <div class="header-content">
           <h1>📝 Mon Blog Firebase</h1>
@@ -16,25 +15,18 @@
             <span id="userInfo"></span>
             <button id="loginBtn" class="btn-primary">Se connecter</button>
             <button id="registerBtn" class="btn-secondary">S'inscrire</button>
-            <button id="logoutBtn" class="btn-danger" style="display: none">
-              Déconnexion
-            </button>
+            <button id="logoutBtn" class="btn-danger" style="display:none">Déconnexion</button>
           </div>
         </div>
       </header>
 
-      <!-- Panel Admin (caché par défaut) -->
-      <div id="adminPanel" class="admin-panel" style="display: none">
+      <div id="adminPanel" class="admin-panel" style="display:none">
         <h3>🔧 Panel Admin</h3>
-        <button id="newArticleBtn" class="btn-primary">
-          ✍️ Nouvel Article
-        </button>
+        <button id="newArticleBtn" class="btn-primary">✍️ Nouvel Article</button>
       </div>
 
-      <!-- Zone de messages -->
       <div id="messageContainer"></div>
 
-      <!-- Container des articles -->
       <div id="articlesContainer" class="articles-container">
         <div class="loading">
           <div class="spinner"></div>
@@ -44,7 +36,6 @@
     </div>
 
     <!-- Modals -->
-    <!-- Modal de connexion -->
     <div id="loginModal" class="modal">
       <div class="modal-content">
         <h2>Connexion</h2>
@@ -59,19 +50,12 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">Se connecter</button>
-            <button
-              type="button"
-              class="btn-secondary"
-              onclick="closeModal('loginModal')"
-            >
-              Annuler
-            </button>
+            <button type="button" class="btn-secondary" onclick="closeModal('loginModal')">Annuler</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal d'inscription -->
     <div id="registerModal" class="modal">
       <div class="modal-content">
         <h2>Inscription</h2>
@@ -86,28 +70,16 @@
           </div>
           <div class="form-group">
             <label>Mot de passe</label>
-            <input
-              type="password"
-              id="registerPassword"
-              required
-              minlength="6"
-            />
+            <input type="password" id="registerPassword" minlength="6" required />
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">S'inscrire</button>
-            <button
-              type="button"
-              class="btn-secondary"
-              onclick="closeModal('registerModal')"
-            >
-              Annuler
-            </button>
+            <button type="button" class="btn-secondary" onclick="closeModal('registerModal')">Annuler</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal d'article -->
     <div id="articleModal" class="modal">
       <div class="modal-content">
         <h2 id="articleModalTitle">Nouvel Article</h2>
@@ -121,29 +93,17 @@
             <textarea id="articleContent" required></textarea>
           </div>
           <div class="form-group">
-            <label>
-              <input type="checkbox" id="articlePublished" checked />
-              Publier immédiatement
-            </label>
+            <label><input type="checkbox" id="articlePublished" checked /> Publier immédiatement</label>
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">Enregistrer</button>
-            <button
-              type="button"
-              class="btn-secondary"
-              onclick="closeModal('articleModal')"
-            >
-              Annuler
-            </button>
+            <button type="button" class="btn-secondary" onclick="closeModal('articleModal')">Annuler</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Scripts Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
-    <script src="script.js"></script>
+    <!-- Script principal -->
+    <script type="module" src="script.js"></script>
   </body>
 </html>
