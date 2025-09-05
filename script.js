@@ -370,27 +370,32 @@ async function loadComments(articleId) {
   if (!commentsContainer) return;
   commentsContainer.innerHTML = "";
 
-  const qComments = query(
-    collection(db, "articles", articleId, "comments"),
-    orderBy("createdAt", "asc")
-  );
-  const snap = await getDocs(qComments);
-  if (snap.empty) {
-    commentsContainer.innerHTML =
-      '<div class="comment-empty">Aucun commentaire</div>';
-    return;
+  try {
+    const qComments = query(
+      collection(db, "articles", articleId, "comments"),
+      orderBy("createdAt", "asc")
+    );
+    const snap = await getDocs(qComments);
+    if (snap.empty) {
+      commentsContainer.innerHTML =
+        '<div class="comment-empty">Aucun commentaire</div>';
+      return;
+    }
+    snap.forEach((d) => {
+      const c = d.data();
+      const when = c.createdAt?.toDate
+        ? c.createdAt.toDate().toLocaleString()
+        : "";
+      commentsContainer.innerHTML += `
+        <div class="comment">
+          <div class="comment-meta">${c.authorName || "Anonyme"} - ${when}</div>
+          <div class="comment-text">${c.text || ""}</div>
+        </div>`;
+    });
+  } catch (err) {
+    console.error("Erreur chargement commentaires:", err);
+    commentsContainer.innerHTML = `<div class="comment-error">Impossible de charger les commentaires: ${err.message}</div>`;
   }
-  snap.forEach((d) => {
-    const c = d.data();
-    const when = c.createdAt?.toDate
-      ? c.createdAt.toDate().toLocaleString()
-      : "";
-    commentsContainer.innerHTML += `
-      <div class="comment">
-        <div class="comment-meta">${c.authorName || "Anonyme"} - ${when}</div>
-        <div class="comment-text">${c.text || ""}</div>
-      </div>`;
-  });
 }
 
 async function addComment(articleId, text) {
@@ -400,12 +405,17 @@ async function addComment(articleId, text) {
   }
   const user = auth.currentUser;
   const authorName = user.displayName || user.email || "Utilisateur";
-  await addDoc(collection(db, "articles", articleId, "comments"), {
-    text,
-    userId: user.uid,
-    authorName,
-    createdAt: serverTimestamp(),
-  });
+  try {
+    await addDoc(collection(db, "articles", articleId, "comments"), {
+      text,
+      userId: user.uid,
+      authorName,
+      createdAt: serverTimestamp(),
+    });
+  } catch (e) {
+    console.error("Erreur création commentaire:", e);
+    alert(`Échec de la création du commentaire: ${e.message}`);
+  }
 }
 
 async function handleArticleSubmit(event) {
