@@ -10,19 +10,23 @@
     <div class="container">
       <header>
         <div class="header-content">
-          <h1>📝 Mon Blog Firebase</h1>
+          <h1>Music Blog</h1>
           <div class="auth-section">
             <span id="userInfo"></span>
             <button id="loginBtn" class="btn-primary">Se connecter</button>
             <button id="registerBtn" class="btn-secondary">S'inscrire</button>
-            <button id="logoutBtn" class="btn-danger" style="display:none">Déconnexion</button>
+            <button id="logoutBtn" class="btn-danger" style="display: none">
+              Déconnexion
+            </button>
           </div>
         </div>
       </header>
 
-      <div id="adminPanel" class="admin-panel" style="display:none">
+      <div id="adminPanel" class="admin-panel" style="display: none">
         <h3>🔧 Panel Admin</h3>
-        <button id="newArticleBtn" class="btn-primary">✍️ Nouvel Article</button>
+        <button id="newArticleBtn" class="btn-primary">
+          ✍️ Nouvel Article
+        </button>
       </div>
 
       <div id="messageContainer"></div>
@@ -50,7 +54,13 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">Se connecter</button>
-            <button type="button" class="btn-secondary" onclick="closeModal('loginModal')">Annuler</button>
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeModal('loginModal')"
+            >
+              Annuler
+            </button>
           </div>
         </form>
       </div>
@@ -70,11 +80,22 @@
           </div>
           <div class="form-group">
             <label>Mot de passe</label>
-            <input type="password" id="registerPassword" minlength="6" required />
+            <input
+              type="password"
+              id="registerPassword"
+              minlength="6"
+              required
+            />
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">S'inscrire</button>
-            <button type="button" class="btn-secondary" onclick="closeModal('registerModal')">Annuler</button>
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeModal('registerModal')"
+            >
+              Annuler
+            </button>
           </div>
         </form>
       </div>
@@ -93,11 +114,20 @@
             <textarea id="articleContent" required></textarea>
           </div>
           <div class="form-group">
-            <label><input type="checkbox" id="articlePublished" checked /> Publier immédiatement</label>
+            <label
+              ><input type="checkbox" id="articlePublished" checked /> Publier
+              immédiatement</label
+            >
           </div>
           <div class="form-group">
             <button type="submit" class="btn-primary">Enregistrer</button>
-            <button type="button" class="btn-secondary" onclick="closeModal('articleModal')">Annuler</button>
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="closeModal('articleModal')"
+            >
+              Annuler
+            </button>
           </div>
         </form>
       </div>
