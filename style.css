@@ -22,14 +22,20 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--text);
-  background: radial-gradient(60% 80% at 20% 10%, #0c1538 0%, var(--bg-1) 35%, var(--bg-0) 100%),
+  /* background: radial-gradient(60% 80% at 20% 10%, #0c1538 0%, var(--bg-1) 35%, var(--bg-0) 100%),
               radial-gradient(60% 80% at 80% 20%, #2a0040 0%, #120024 45%, transparent 100%),
-              linear-gradient(180deg, #070912 0%, #070912 100%);
+              linear-gradient(180deg, #070912 0%, #070912 100%); */
   min-height: 100vh;
+  background-image: url(/image/background.webp);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* ---------------------
@@ -42,10 +48,10 @@ body::before {
   left: -20%;
   width: 140%;
   height: 140%;
-  background:
+  /* background:
     radial-gradient(40% 50% at 20% 30%, rgba(0, 209, 255, 0.18) 0%, rgba(0,0,0,0) 60%),
     radial-gradient(35% 45% at 80% 20%, rgba(161, 0, 255, 0.14) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(30% 40% at 50% 80%, rgba(255, 0, 230, 0.10) 0%, rgba(0,0,0,0) 60%);
+    radial-gradient(30% 40% at 50% 80%, rgba(255, 0, 230, 0.10) 0%, rgba(0,0,0,0) 60%); */
   filter: blur(40px);
   animation: moveBlobs 26s ease-in-out infinite alternate;
   pointer-events: none;
