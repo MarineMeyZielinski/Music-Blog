@@ -21,19 +21,22 @@
   box-sizing: border-box;
 }
 
+
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: var(--text);
-  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+
+ Développement
   min-height: 100vh;
+  background-image: url(/image/background.webp);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* ---------------------
    BACKGROUND ANIMÉ LÉGER
    --------------------- */
 body::before {
-  display: none;
 }
 
 body::after {
