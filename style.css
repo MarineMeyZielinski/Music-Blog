@@ -25,8 +25,8 @@
 
 body {
 
- Développement
-  min-height: 100vh;
+ /* Développement
+  min-height: 100vh; */
   background-image: url(/image/background.webp);
   background-size: cover;
   background-attachment: fixed;
@@ -37,8 +37,7 @@ body {
 /* ---------------------
    BACKGROUND ANIMÉ LÉGER
    --------------------- */
-body::before {
-}
+
 
 body::after {
   display: none;
