@@ -1,20 +1,20 @@
 /* =====================
-   RESET ET BASE (Thème Dark + Néon Cyberpunk)
+   RESET ET BASE (Thème Dark)
    ===================== */
 :root {
-  --bg-0: #070912;
-  --bg-1: #0c1022;
-  --bg-2: #101735;
-  --text: #0c0cd6;
-  --muted: #9aa3b2;
-  --neon-cyan: #00fff0;
+  --bg-0: #11ff00;
+  --bg-1: #22b522;
+  --bg-2: #00ff0d;
+  --text: #000303;
+  --muted: #ffffff;
+  /* --neon-cyan: #00fff0;
   --neon-blue: #00d1ff;
   --neon-magenta: #ff00e6;
-  --neon-purple: #a100ff;
-  --danger: #ff3860;
-  --glass: rgba(13, 19, 45, 0.6);
-  --glass-2: rgba(13, 19, 45, 0.85);
-  --border: rgba(0, 255, 240, 0.2);
+  --neon-purple: #a100ff; */
+  --danger: #38ffde94;
+  --glass: #fcdd1222;
+  --glass-2: #fcdd1222;
+  --border: rgba(0, 255, 238, 0.418);
 }
 * {
   margin: 0;
@@ -47,6 +47,7 @@ body::after {
   padding: 20px;
   justify-self: right;
   margin-right: 40px;
+  font-size: 22px;
 }
 
 /* =====================
@@ -58,7 +59,7 @@ header {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
-  box-shadow: 0 0 0 1px var(--border), 0 10px 24px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px var(--border), 0 10px 24px rgba(0, 225, 255, 0.45);
 }
 
 .header-content {
@@ -94,40 +95,46 @@ button {
   color: var(--text);
 }
 
-.btn-primary {
-  background: linear-gradient(180deg, var(--accent-brown), #6f4526);
-  border: 1px solid rgba(0, 0, 0, 0.35);
-  color: #fff8ee;
-}
-
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
-}
-
+.btn-primary,
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, var(--accent-brown), #919f8b);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  color: #010000;
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-primary1:hover,
+.btn-primary2:hover,
+.btn-secondary2:hover,
+.btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(73, 119, 126, 0.35);
 }
 
 .btn-danger {
-  background: linear-gradient(180deg, #a24846, #862f2d);
-  color: #fff1f1;
+  background-color: var(--danger);
+  color: #010000;
   border: 1px solid rgba(0, 0, 0, 0.35);
-}
-
-.btn-danger:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 .btn-small {
   padding: 5px 10px;
   font-size: 12px;
+  color: rgb(0, 42, 255);
+}
+
+.btn-primary1,
+.btn-primary2 {
+  background-color: rgba(5, 215, 215, 0.388);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+}
+
+.btn-secondary2 {
+  background-color: rgba(255, 0, 110, 0.274);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  color: #ffffff;
 }
 
 /* =====================
@@ -232,8 +239,8 @@ input,
 textarea {
   width: 100%;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
+  background: rgba(7, 93, 113, 0.477);
+  color: black;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   font-size: 14px;
@@ -243,7 +250,7 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: rgba(0, 209, 255, 0.6);
+  border-color: rgba(0, 208, 255, 0.979);
   box-shadow: 0 0 12px rgba(0, 209, 255, 0.25);
 }
 
@@ -265,12 +272,12 @@ textarea {
 .article {
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.02)
+    rgba(70, 58, 14, 0.377),
+    rgba(53, 42, 2, 0.783)
   );
   padding: 22px;
   border-radius: 10px;
-  box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(43, 70, 71, 0.61);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -304,10 +311,11 @@ textarea {
 
 .article-content,
 .article p {
-  color: #c8d0e0;
+  color: #ecededd4;
   line-height: 1.8;
   margin-bottom: 20px;
   white-space: pre-wrap;
+  font-size: 20px;
 }
 
 .article-actions {
@@ -331,7 +339,7 @@ textarea {
   align-items: center;
   gap: 5px;
   padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(174, 45, 45, 0.685);
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -351,7 +359,7 @@ textarea {
 .comments {
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 2px solid rgba(255, 255, 255, 0.08);
+  border-top: 2px solid rgb(7, 255, 234);
 }
 
 .comment {
@@ -364,13 +372,13 @@ textarea {
 
 .comment-author {
   font-weight: 600;
-  color: var(--neon-blue);
+
   margin-bottom: 5px;
   text-shadow: 0 0 8px rgba(0, 209, 255, 0.2);
 }
 
 .comment-content {
-  color: #c8d0e0;
+  color: #0758fb;
   margin-bottom: 5px;
 }
 
@@ -393,11 +401,11 @@ textarea {
    UTILITAIRES
    ===================== */
 .admin-panel {
-  background: rgba(214, 167, 83, 0.1);
+  background: rgba(88, 56, 2, 0.295);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border: 1px solid rgba(214, 167, 83, 0.3);
+  border: 1px solid rgba(7, 230, 255, 0.847);
 }
 
 .loading {
