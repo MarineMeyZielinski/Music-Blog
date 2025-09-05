@@ -359,3 +359,14 @@ textarea {
     gap: 10px;
   }
 }
+
+/* // CSS pour le mode sombre */
+body.dark-mode {
+  background: #1a1a1a;
+  color: white;
+}
+
+.dark-mode .article-card {
+  background: #2a2a2a;
+  color: white;
+}
