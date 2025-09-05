@@ -2,19 +2,18 @@
    RESET ET BASE (Thème Dark + Néon Cyberpunk)
    ===================== */
 :root {
-  --bg-0: #070912;
-  --bg-1: #0c1022;
-  --bg-2: #101735;
-  --text: #e6e6f0;
-  --muted: #9aa3b2;
-  --neon-cyan: #00fff0;
-  --neon-blue: #00d1ff;
-  --neon-magenta: #ff00e6;
-  --neon-purple: #a100ff;
-  --danger: #ff3860;
-  --glass: rgba(13, 19, 45, 0.6);
-  --glass-2: rgba(13, 19, 45, 0.85);
-  --border: rgba(0, 255, 240, 0.2);
+  /* Palette simple 70s: bruns, or, noir */
+  --bg-0: #13100d;
+  --bg-1: #1b1611;
+  --bg-2: #221b14;
+  --text: #efe9dc;
+  --muted: #b8ad9a;
+  --accent-gold: #d6a753;
+  --accent-brown: #8b5e34;
+  --danger: #b94a48;
+  --glass: rgba(40, 32, 24, 0.6);
+  --glass-2: rgba(34, 27, 20, 0.9);
+  --border: rgba(214, 167, 83, 0.22);
 }
 * {
   margin: 0;
@@ -26,9 +25,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: var(--text);
-  background: radial-gradient(60% 80% at 20% 10%, #0c1538 0%, var(--bg-1) 35%, var(--bg-0) 100%),
-              radial-gradient(60% 80% at 80% 20%, #2a0040 0%, #120024 45%, transparent 100%),
-              linear-gradient(180deg, #070912 0%, #070912 100%);
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
   min-height: 100vh;
 }
 
@@ -36,37 +33,11 @@ body {
    BACKGROUND ANIMÉ LÉGER
    --------------------- */
 body::before {
-  content: "";
-  position: fixed;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background:
-    radial-gradient(40% 50% at 20% 30%, rgba(0, 209, 255, 0.18) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(35% 45% at 80% 20%, rgba(161, 0, 255, 0.14) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(30% 40% at 50% 80%, rgba(255, 0, 230, 0.10) 0%, rgba(0,0,0,0) 60%);
-  filter: blur(40px);
-  animation: moveBlobs 26s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.025) 0px,
-      rgba(255,255,255,0.025) 1px,
-      transparent 3px
-    );
-  opacity: 0.25;
-  animation: scan 10s linear infinite;
-  pointer-events: none;
-  z-index: -1;
+  display: none;
 }
 
 .container {
@@ -80,11 +51,11 @@ body::after {
    ===================== */
 header {
   background: var(--glass);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 30px;
-  box-shadow: 0 0 0 1px var(--border), 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 209, 255, 0.05);
+  box-shadow: 0 0 0 1px var(--border), 0 10px 24px rgba(0, 0, 0, 0.45);
 }
 
 .header-content {
@@ -97,11 +68,7 @@ header {
 
 h1 {
   font-size: 2em;
-  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 10px rgba(0, 255, 240, 0.3), 0 0 18px rgba(161, 0, 255, 0.2);
+  color: var(--accent-gold);
 }
 
 .auth-section {
@@ -111,7 +78,7 @@ h1 {
 }
 
 /* =====================
-   BOUTONS (Néon)
+   BOUTONS (style simple 70s)
    ===================== */
 button {
   padding: 10px 20px;
@@ -125,16 +92,14 @@ button {
 }
 
 .btn-primary {
-  position: relative;
-  background: linear-gradient(135deg, rgba(0, 209, 255, 0.2) 0%, rgba(161, 0, 255, 0.2) 100%);
-  border: 1px solid rgba(0, 209, 255, 0.4);
-  box-shadow: 0 0 12px rgba(0, 209, 255, 0.25), inset 0 0 12px rgba(0, 209, 255, 0.15);
+  background: linear-gradient(180deg, var(--accent-brown), #6f4526);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  color: #fff8ee;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  border-color: rgba(161, 0, 255, 0.6);
-  box-shadow: 0 0 18px rgba(161, 0, 255, 0.45), inset 0 0 18px rgba(0, 209, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 .btn-secondary {
@@ -148,14 +113,13 @@ button {
 }
 
 .btn-danger {
-  background: rgba(255, 56, 96, 0.18);
-  color: #ffdbe3;
-  border: 1px solid rgba(255, 56, 96, 0.6);
+  background: linear-gradient(180deg, #a24846, #862f2d);
+  color: #fff1f1;
+  border: 1px solid rgba(0, 0, 0, 0.35);
 }
 
 .btn-danger:hover {
-  background: rgba(255, 56, 96, 0.28);
-  box-shadow: 0 0 16px rgba(255, 56, 96, 0.45);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 
 .btn-small {
@@ -188,11 +152,11 @@ button {
   background: var(--glass-2);
   color: var(--text);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 90%;
   max-width: 560px;
   animation: slideIn 0.3s ease;
-  box-shadow: 0 0 0 1px var(--border), 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(161, 0, 255, 0.1);
+  box-shadow: 0 0 0 1px var(--border), 0 10px 30px rgba(0, 0, 0, 0.55);
 }
 
 /* =====================
@@ -228,23 +192,10 @@ button {
 }
 
 /* Blobs movement */
-@keyframes moveBlobs {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-2%, 1.5%, 0) scale(1.03);
-  }
-  100% {
-    transform: translate3d(2%, -1.5%, 0) scale(1.06);
-  }
-}
+@keyframes moveBlobs { 0% { transform: none; } 100% { transform: none; } }
 
 /* Scanlines subtle vertical drift */
-@keyframes scan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-8px); }
-}
+@keyframes scan { 0% { transform: none; } 100% { transform: none; } }
 
 /* =====================
    FORMULAIRES
@@ -297,15 +248,15 @@ textarea {
 .article {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
   padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 0 0 1px var(--border), 0 10px 30px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .article-card:hover,
 .article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 0 1px rgba(161, 0, 255, 0.35), 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 209, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(214, 167, 83, 0.35), 0 16px 30px rgba(0, 0, 0, 0.45);
 }
 
 .article-header {
@@ -320,7 +271,6 @@ textarea {
   font-size: 1.5em;
   margin-bottom: 10px;
   color: var(--text);
-  text-shadow: 0 0 8px rgba(0, 255, 240, 0.15);
 }
 
 .article-meta,
@@ -371,9 +321,8 @@ textarea {
 }
 
 .reaction-btn.active {
-  background: rgba(0, 209, 255, 0.25);
+  background: rgba(214, 167, 83, 0.15);
   color: var(--text);
-  box-shadow: 0 0 12px rgba(0, 209, 255, 0.25);
 }
 
 .comments-section,
@@ -422,12 +371,11 @@ textarea {
    UTILITAIRES
    ===================== */
 .admin-panel {
-  background: linear-gradient(90deg, rgba(0, 209, 255, 0.1), rgba(161, 0, 255, 0.08));
+  background: rgba(214, 167, 83, 0.1);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border: 1px solid rgba(0, 209, 255, 0.3);
-  box-shadow: 0 0 16px rgba(0, 209, 255, 0.15);
+  border: 1px solid rgba(214, 167, 83, 0.3);
 }
 
 .loading {
