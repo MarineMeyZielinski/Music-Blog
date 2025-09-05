@@ -328,8 +328,12 @@ async function loadArticlesWithPagination(isNext = true) {
             <div class="comments" id="comments-${docSnap.id}">
               <div class="comments-list" id="comments-list-${docSnap.id}"></div>
               <div class="comment-form">
-                <input type="text" id="comment-input-${docSnap.id}" placeholder="Votre commentaire..." />
-                <button class="comment-submit" data-article-id="${docSnap.id}">Commenter</button>
+                <input type="text" id="comment-input-${
+                  docSnap.id
+                }" placeholder="Votre commentaire..." />
+                <button class="comment-submit" data-article-id="${
+                  docSnap.id
+                }">Commenter</button>
               </div>
             </div>
           </div>`;
@@ -360,7 +364,9 @@ async function loadArticlesWithPagination(isNext = true) {
 }
 
 async function loadComments(articleId) {
-  const commentsContainer = document.getElementById(`comments-list-${articleId}`);
+  const commentsContainer = document.getElementById(
+    `comments-list-${articleId}`
+  );
   if (!commentsContainer) return;
   commentsContainer.innerHTML = "";
 
@@ -370,12 +376,15 @@ async function loadComments(articleId) {
   );
   const snap = await getDocs(qComments);
   if (snap.empty) {
-    commentsContainer.innerHTML = "<div class=\"comment-empty\">Aucun commentaire</div>";
+    commentsContainer.innerHTML =
+      '<div class="comment-empty">Aucun commentaire</div>';
     return;
   }
   snap.forEach((d) => {
     const c = d.data();
-    const when = c.createdAt?.toDate ? c.createdAt.toDate().toLocaleString() : "";
+    const when = c.createdAt?.toDate
+      ? c.createdAt.toDate().toLocaleString()
+      : "";
     commentsContainer.innerHTML += `
       <div class="comment">
         <div class="comment-meta">${c.authorName || "Anonyme"} - ${when}</div>
