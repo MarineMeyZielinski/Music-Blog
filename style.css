@@ -22,11 +22,8 @@
   box-sizing: border-box;
 }
 
-
 body {
-
- /* Développement
-  min-height: 100vh; */
+  min-height: 100vh;
   background-image: url(/image/background.webp);
   background-size: cover;
   background-attachment: fixed;
@@ -37,16 +34,19 @@ body {
 /* ---------------------
    BACKGROUND ANIMÉ LÉGER
    --------------------- */
-
+body::before {
+}
 
 body::after {
   display: none;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 750px;
+  /* margin: 0 auto; */
   padding: 20px;
+  justify-self: right;
+  margin-right: 40px;
 }
 
 /* =====================
@@ -195,10 +195,24 @@ button {
 }
 
 /* Blobs movement */
-@keyframes moveBlobs { 0% { transform: none; } 100% { transform: none; } }
+@keyframes moveBlobs {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: none;
+  }
+}
 
 /* Scanlines subtle vertical drift */
-@keyframes scan { 0% { transform: none; } 100% { transform: none; } }
+@keyframes scan {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: none;
+  }
+}
 
 /* =====================
    FORMULAIRES
@@ -249,7 +263,11 @@ textarea {
 
 .article-card,
 .article {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.02)
+  );
   padding: 22px;
   border-radius: 10px;
   box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0, 0, 0, 0.35);
@@ -259,7 +277,8 @@ textarea {
 .article-card:hover,
 .article:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 0 1px rgba(214, 167, 83, 0.35), 0 16px 30px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px rgba(214, 167, 83, 0.35),
+    0 16px 30px rgba(0, 0, 0, 0.45);
 }
 
 .article-header {
@@ -430,5 +449,6 @@ body.dark-mode {
 
 .dark-mode .article-card,
 .dark-mode .article {
-  box-shadow: 0 0 0 1px rgba(0, 255, 240, 0.25), 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 209, 255, 0.09);
+  box-shadow: 0 0 0 1px rgba(0, 255, 240, 0.25), 0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(0, 209, 255, 0.09);
 }
