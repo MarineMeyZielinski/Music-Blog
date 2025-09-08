@@ -253,15 +253,18 @@ async function loadArticlesWithPagination(isNext = true) {
     if (!snapshot.empty) {
       lastVisible = snapshot.docs[snapshot.docs.length - 1];
 
+      const htmlParts = [];
+      const idsToLoad = [];
       snapshot.forEach((docSnap) => {
         const article = docSnap.data();
         const articleId = docSnap.id;
+        idsToLoad.push(articleId);
 
         const createdAtText = article.createdAt?.toDate
           ? article.createdAt.toDate().toLocaleString()
           : "";
 
-        container.innerHTML += `
+        htmlParts.push(`
           <div class="article" data-article-id="${articleId}">
             <h2>${article.title || "(Sans titre)"}</h2>
             <div class="meta">${createdAtText}</div>
@@ -274,10 +277,12 @@ async function loadArticlesWithPagination(isNext = true) {
                 <button class="comment-submit" data-article-id="${articleId}">Commenter</button>
               </div>
             </div>
-          </div>`;
+          </div>`);
+      });
 
-        // Charger les commentaires de l'article
-        loadComments(articleId).catch(() => {});
+      container.innerHTML = htmlParts.join("");
+      idsToLoad.forEach((id) => {
+        loadComments(id).catch(() => {});
       });
 
       // Délégation d'événements pour les formulaires de commentaires (une seule fois)
@@ -313,6 +318,8 @@ async function loadArticlesWithPagination(isNext = true) {
         container.innerHTML = "<p>Aucun article à afficher.</p>";
         return;
       }
+      const htmlParts = [];
+      const idsToLoad = [];
       snap.forEach((docSnap) => {
         const a = docSnap.data();
         const isPublished = a.published === true || a.published === "true";
@@ -320,7 +327,8 @@ async function loadArticlesWithPagination(isNext = true) {
         const createdAtText = a.createdAt?.toDate
           ? a.createdAt.toDate().toLocaleString()
           : "";
-        container.innerHTML += `
+        idsToLoad.push(docSnap.id);
+        htmlParts.push(`
           <div class="article" data-article-id="${docSnap.id}">
             <h2>${a.title || "(Sans titre)"}</h2>
             <div class="meta">${createdAtText}</div>
@@ -328,16 +336,15 @@ async function loadArticlesWithPagination(isNext = true) {
             <div class="comments" id="comments-${docSnap.id}">
               <div class="comments-list" id="comments-list-${docSnap.id}"></div>
               <div class="comment-form">
-                <input type="text" id="comment-input-${
-                  docSnap.id
-                }" placeholder="Votre commentaire..." />
-                <button class="comment-submit" data-article-id="${
-                  docSnap.id
-                }">Commenter</button>
+                <input type="text" id="comment-input-${docSnap.id}" placeholder="Votre commentaire..." />
+                <button class="comment-submit" data-article-id="${docSnap.id}">Commenter</button>
               </div>
             </div>
-          </div>`;
-        loadComments(docSnap.id).catch(() => {});
+          </div>`);
+      });
+      container.innerHTML = htmlParts.join("");
+      idsToLoad.forEach((id) => {
+        loadComments(id).catch(() => {});
       });
       if (!commentsClickListenerAttached) {
         container.addEventListener("click", async (e) => {
