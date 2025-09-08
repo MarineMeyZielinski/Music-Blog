@@ -6,7 +6,16 @@
     <title>Mon Blog Firebase</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="light">
+    <!-- Bouton de thème en haut à droite -->
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      onclick="attemptThemeChange()"
+    >
+      🌙 Dark
+    </button>
+
     <div class="container">
       <header>
         <div class="header-content">
@@ -39,7 +48,7 @@
       </div>
     </div>
 
-    <!-- Modals -->
+    <!-- Modals existantes -->
     <div id="loginModal" class="modal">
       <div class="modal-content">
         <h2>Connexion</h2>
@@ -133,7 +142,8 @@
       </div>
     </div>
 
-    <!-- Script principal -->
-    <script type="module" src="script.js"></script>
+    <!-- Scripts -->
+    <script defer src="theme-gothic.js"></script>
+    <script defer type="module" src="script.js"></script>
   </body>
 </html>

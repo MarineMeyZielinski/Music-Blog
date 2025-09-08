@@ -53,8 +53,9 @@ async function loadArticles() {
   // Placeholder, à compléter selon ta logique
   const container = document.getElementById("articlesContainer");
   container.innerHTML = "<p>Chargement des articles...</p>";
-  // toggleDarkMode();
-  await loadArticlesWithPagination();
+  // Toujours repartir de la première page après (re)chargement ou login
+  lastVisible = null;
+  await loadArticlesWithPagination(false);
   // TODO: fetch articles from Firestore and display them
 }
 
@@ -296,6 +297,13 @@ async function loadArticlesWithPagination(isNext = true) {
         });
         commentsClickListenerAttached = true;
       }
+
+      // Réappliquer le thème après rendu
+      if (typeof window.initGothicTheme === "function") {
+        try {
+          window.initGothicTheme();
+        } catch (_) {}
+      }
     } else {
       container.innerHTML = "<p>Aucun article à afficher.</p>";
     }
@@ -353,6 +361,12 @@ async function loadArticlesWithPagination(isNext = true) {
           }
         });
         commentsClickListenerAttached = true;
+      }
+      // Réappliquer le thème en fallback aussi
+      if (typeof window.initGothicTheme === "function") {
+        try {
+          window.initGothicTheme();
+        } catch (_) {}
       }
       // Indiquer à l'utilisateur qu'un index peut être nécessaire
       container.innerHTML += `<div class="info">Astuce: si les articles n'apparaissent pas tous, crée l'index Firestore suggéré dans la console.</div>`;
