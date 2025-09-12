@@ -45,3 +45,6 @@ if (document.readyState === "loading") {
 window.attemptThemeChange = attemptThemeChange;
 
 window.declineDarkSide = declineDarkSide;
+
+window.declineDarkSide = declineDarkSide;
+window.declineDarkSide = declineDarkSide;
