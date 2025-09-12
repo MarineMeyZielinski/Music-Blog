@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel:wght@400;600&display=swap");
+
 /* =====================
    RESET ET BASE (Thème Dark)
    ===================== */
@@ -5,17 +7,14 @@
   --bg-0: #11ff00;
   --bg-1: #22b522;
   --bg-2: #00ff0d;
-  --text: #000303;
+  --text: #8e8e8e;
   --muted: #ffffff;
-  /* --neon-cyan: #00fff0;
-  --neon-blue: #00d1ff;
-  --neon-magenta: #ff00e6;
-  --neon-purple: #a100ff; */
   --danger: #38ffde94;
   --glass: #fcdd1222;
   --glass-2: #fcdd1222;
   --border: rgba(0, 255, 238, 0.418);
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -29,21 +28,119 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---------------------
-   BACKGROUND ANIMÉ LÉGER
-   --------------------- */
-body::before {
+/* Background override when dark mode background is requested */
+.bg-darkMode {
+  background-image: linear-gradient(rgba(10, 10, 10, 0), rgba(22, 33, 62, 0)),
+    url(/image/background.webp) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
 }
 
-body::after {
-  display: none;
+/* Mode Light (ajouté pour la transition) */
+body.light {
+  filter: brightness(1) saturate(1);
+}
+
+/* Mode Dark - transforme complètement l'apparence */
+body.dark {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed;
+  filter: brightness(0.9) saturate(1.2);
+  --text: #e0e0e0;
+  --muted: #aaaaaa;
+}
+
+/* Priorité quand dark + bg-darkMode: impose l'image sombre */
+body.dark.bg-darkMode {
+  background: none !important;
+  background-image: linear-gradient(
+      rgba(10, 10, 10, 0.75),
+      rgba(22, 33, 62, 0.75)
+    ),
+    url(/image/bg-darkMode.webp) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+/* Si le body est en dark ET a bg-darkMode, forcer l'image sombre à prévaloir */
+body.dark.bg-darkMode {
+  background: none !important;
+  background-image: linear-gradient(rgba(10, 10, 10, 0), rgba(22, 33, 62, 0)),
+    url(/image/bg-darkMode.webp) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
+}
+
+body.dark .container {
+  color: #e0e0e0;
+}
+
+body.dark header {
+  background: rgba(26, 26, 46, 0.3);
+  border: 1px solid rgba(139, 0, 0, 0.3);
+}
+
+body.dark h1 {
+  color: #ff4757;
+  text-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+}
+
+body.dark .article-card,
+body.dark .article {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  border: 1px solid rgba(139, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.1);
+}
+
+body.dark .article h2,
+body.dark .article-title {
+  color: #ff6b7a;
+}
+
+body.dark .article p,
+body.dark .article-content {
+  color: #d1d5db;
+}
+
+/* Bouton de thème en haut à droite */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(45deg, #01000b, #3b385d);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 40%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+}
+
+body.dark .theme-toggle {
+  background: linear-gradient(45deg, #091445, #3f2857);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
 }
 
 .container {
   max-width: 750px;
-  /* margin: 0 auto; */
   padding: 20px;
   justify-self: right;
   margin-right: 40px;
@@ -95,11 +192,16 @@ button {
   color: var(--text);
 }
 
-.btn-primary,
+.btn-primary {
+  background: #0ea4e9;
+  color: #898787;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
 .btn-secondary {
-  background: linear-gradient(180deg, var(--accent-brown), #919f8b);
-  border: 1px solid rgba(0, 0, 0, 0.35);
-  color: #010000;
+  background: #ef4444;
+  color: #757272;
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .btn-primary:hover,
@@ -112,17 +214,19 @@ button {
   box-shadow: 0 4px 10px rgba(73, 119, 126, 0.35);
 }
 
+/* reset hover to previous common effect only */
+
 .btn-danger {
   background-color: var(--danger);
-  color: #010000;
+  color: #000000;
   border: 1px solid rgba(0, 0, 0, 0.35);
 }
 
-.btn-small {
+/* .btn-small {
   padding: 5px 10px;
   font-size: 12px;
   color: rgb(0, 42, 255);
-}
+} */
 
 .btn-primary1,
 .btn-primary2 {
@@ -138,7 +242,7 @@ button {
 }
 
 /* =====================
-   MODALS
+   MODALS (existantes)
    ===================== */
 .modal {
   display: none;
@@ -148,7 +252,7 @@ button {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.55);
-  z-index: 1000;
+  z-index: 2001;
 }
 
 .modal.active {
@@ -167,6 +271,13 @@ button {
   max-width: 560px;
   animation: slideIn 0.3s ease;
   box-shadow: 0 0 0 1px var(--border), 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* Assurer un bon contraste en mode sombre pour le contenu de la modale */
+body.dark .modal-content {
+  background: rgba(20, 22, 34, 0.92);
+  color: #e5e7eb;
+  border: 1px solid rgba(139, 0, 0, 0.35);
 }
 
 /* =====================
@@ -198,26 +309,6 @@ button {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-/* Blobs movement */
-@keyframes moveBlobs {
-  0% {
-    transform: none;
-  }
-  100% {
-    transform: none;
-  }
-}
-
-/* Scanlines subtle vertical drift */
-@keyframes scan {
-  0% {
-    transform: none;
-  }
-  100% {
-    transform: none;
   }
 }
 
@@ -272,8 +363,8 @@ textarea {
 .article {
   background: linear-gradient(
     180deg,
-    rgba(70, 58, 14, 0.377),
-    rgba(53, 42, 2, 0.783)
+    rgba(78, 75, 64, 0.792),
+    rgba(78, 75, 64, 0.792)
   );
   padding: 22px;
   border-radius: 10px;
@@ -372,7 +463,6 @@ textarea {
 
 .comment-author {
   font-weight: 600;
-
   margin-bottom: 5px;
   text-shadow: 0 0 8px rgba(0, 209, 255, 0.2);
 }
@@ -405,7 +495,7 @@ textarea {
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
-  border: 1px solid rgba(7, 230, 255, 0.847);
+  border: 1px solid rgba(7, 230, 255, 0.806);
 }
 
 .loading {
@@ -451,6 +541,427 @@ textarea {
 }
 
 /* Mode sombre optionnel (déjà sombre par défaut, on ajoute juste un boost néon) */
+body.dark-mode {
+  filter: saturate(1.05);
+}
+
+.dark-mode .article-card,
+.dark-mode .article {
+  box-shadow: 0 0 0 1px rgba(0, 255, 240, 0.25), 0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(0, 209, 255, 0.09);
+}
+
+.modal {
+  display: none;
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  z-index: 999;
+}
+
+.modal.active {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: var(--glass-2);
+
+  color: var(--text);
+
+  padding: 30px;
+
+  border-radius: 10px;
+
+  width: 90%;
+
+  max-width: 560px;
+
+  animation: slideIn 0.3s ease;
+
+  box-shadow: 0 0 0 1px var(--border), 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+/* =====================
+
+   ANIMATIONS
+
+   ===================== */
+
+/* @keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
+/* =====================
+
+   FORMULAIRES
+
+   ===================== */
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--muted);
+
+  font-weight: 500;
+}
+
+input,
+textarea {
+  width: 100%;
+
+  padding: 10px;
+
+  background: rgba(0, 3, 4, 0.477);
+
+  color: rgb(255, 255, 255);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+
+  border-color: rgba(0, 208, 255, 0.979);
+
+  box-shadow: 0 0 12px rgba(0, 209, 255, 0.25);
+}
+
+textarea {
+  resize: vertical;
+
+  min-height: 150px;
+
+  font-family: inherit;
+}
+
+/* =====================
+
+   ARTICLES
+
+   ===================== */
+
+.articles-container {
+  display: grid;
+
+  gap: 20px;
+}
+
+.article-card,
+.article {
+  background: linear-gradient(
+    180deg,
+    rgba(78, 75, 64, 0.792),
+    rgba(78, 75, 64, 0.792)
+  );
+
+  padding: 22px;
+
+  border-radius: 10px;
+
+  box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(43, 70, 71, 0.61);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-card:hover,
+.article:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 0 0 1px rgba(214, 167, 83, 0.35),
+    0 16px 30px rgba(0, 0, 0, 0.45);
+}
+
+.article-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  margin-bottom: 15px;
+}
+
+.article-title,
+.article h2 {
+  font-size: 1.5em;
+
+  margin-bottom: 10px;
+
+  color: var(--text);
+}
+
+.article-meta,
+.article .meta {
+  color: var(--muted);
+
+  font-size: 0.9em;
+
+  margin-bottom: 15px;
+}
+
+.article-content,
+.article p {
+  color: #ecededd4;
+
+  line-height: 1.8;
+
+  margin-bottom: 20px;
+
+  white-space: pre-wrap;
+
+  font-size: 20px;
+}
+
+.article-actions {
+  display: flex;
+
+  gap: 10px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* =====================
+
+   REACTIONS ET COMMENTAIRES
+
+   ===================== */
+
+.reactions {
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+}
+
+.reaction-btn {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 10px;
+
+  background: rgba(174, 45, 45, 0.685);
+
+  border: none;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.reaction-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.reaction-btn.active {
+  background: rgba(214, 167, 83, 0.15);
+
+  color: var(--text);
+}
+
+.comments-section,
+.comments {
+  margin-top: 20px;
+
+  padding-top: 20px;
+
+  border-top: 2px solid rgb(156, 236, 229);
+}
+
+.comment {
+  background: rgba(255, 255, 255, 0.04);
+
+  padding: 14px;
+
+  border-radius: 8px;
+
+  margin-bottom: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comment-author {
+  font-weight: 600;
+
+  margin-bottom: 5px;
+
+  text-shadow: 0 0 8px rgba(0, 209, 255, 0.2);
+}
+
+.comment-content {
+  color: #0758fb;
+
+  margin-bottom: 5px;
+}
+
+.comment-date {
+  font-size: 0.8em;
+
+  color: var(--muted);
+}
+
+.comment-form {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+.comment-form input {
+  flex: 1;
+}
+
+/* =====================
+
+   UTILITAIRES
+
+   ===================== */
+
+.admin-panel {
+  background: rgba(88, 56, 2, 0.295);
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  margin-bottom: 20px;
+
+  border: 1px solid rgba(7, 230, 255, 0.847);
+}
+
+.loading {
+  text-align: center;
+
+  padding: 40px;
+
+  color: var(--text);
+
+  font-size: 1.2em;
+}
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 50%;
+
+  border-top: 3px solid var(--neon-cyan);
+
+  width: 40px;
+
+  height: 40px;
+
+  animation: spin 1s linear infinite;
+
+  margin: 20px auto;
+
+  box-shadow: 0 0 18px rgba(0, 255, 240, 0.35);
+}
+
+/* =====================
+
+   RESPONSIVE
+
+   ===================== */
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .modal-content {
+    width: 95%;
+
+    padding: 20px;
+  }
+
+  .article-header {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+
+  .gothic-buttons {
+    flex-direction: column;
+
+    gap: 1rem;
+  }
+}
+
+/* Mode sombre optionnel (déjà sombre par défaut, on ajoute juste un boost néon) */
+
 body.dark-mode {
   filter: saturate(1.05);
 }
