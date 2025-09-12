@@ -464,3 +464,4 @@ async function handleArticleSubmit(event) {
 //     // Insérer l'URL dans le contenu de l'article
 //   }
 // });
+
